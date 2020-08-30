@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+nav {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    margin-top: 0.4rem;
+}
+
+nav ul li {
+    padding: 1rem;
+    display: inline-block;
+    font-size: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #1B2A27;
+    
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+nav h2 {
+    margin: 0;
+    padding: 1rem;
+    font-family: 'Anton',sans-serif;
+    color: #1B2A27;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #dbe1e4;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+form * {
+    width: 150px;
+    justify-self: center;
+}
+
+.form-field {
+    display: inline-block;
+    margin: 1rem;
+    padding: 0.25rem;
+    border: 1px solid #1b2a27;
+}
+
+.btn {
+    padding: 0.25rem;
+    background-color: #03d7c2;
+    border: 0;
+    width: 160px;
+    margin: 1rem;
+    color: white;
+    font-weight: bold;
+}
+
+/* #1B2A27 - dark
+   #03D7C2 - teal
+   #9986E3 - violet
+   #DBE1E4 - grey
+   #F47847 - orange
+   #EFEB3D - yellow
+*/
