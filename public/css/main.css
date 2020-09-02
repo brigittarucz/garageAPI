@@ -70,6 +70,87 @@ form * {
     font-weight: bold;
 }
 
+main {
+    margin: 1.25rem;
+}
+
+h1 {
+    color: #1B2A27;
+}
+
+.artist-article {
+    margin: 1.5rem;
+    width: 320px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.artist-article iframe {
+    width: 100%;
+}
+
+.artist-article * {
+    color: #1B2A27;
+}
+
+.artist-article *:not(iframe):not(.genre):not(.btn) {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1.5rem;
+}
+
+iframe {
+    border: 0;
+    border-radius: 10px 10px 0px 0px;
+    opacity: 0.85;
+}
+
+.artist-article small {
+    font-weight: bold;
+    color: #9986E3;
+}
+
+.artist-article h4 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.artist-article p {
+    margin: 0;
+}
+
+.artist-article .genre {
+    color: #9986E3;
+}
+
+.artist-article a {
+    font-size: 18px;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.artist-article_action {
+    display: flex;
+    justify-content: center;
+}
+
+.artist-article_action .btn {
+    margin: 0;
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    width: 100px;
+    display: inline-block;
+}
+
+.artists-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
 /* #1B2A27 - dark
    #03D7C2 - teal
    #9986E3 - violet

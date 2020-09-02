@@ -1,0 +1,13 @@
+{
+    "artists": [{
+        "id": "1ac9f27b-a7a4-42ea-a428-d05ce4aa0e2d",
+        "artistName": "AA",
+        "subgenre": "AAA",
+        "url1": "URL1",
+        "song1": "S1",
+        "url2": "URL2",
+        "song2": "S2",
+        "url3": "URL3",
+        "song3": "S3"
+    }]
+}

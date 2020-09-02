@@ -8,31 +8,38 @@
 //     res.write('<html><h1>Hello from app.js</h1></html>');
 //     return res.end();
 //     }
-   
+
 // })
 
 // exports.requestHandler = requestHandler;
 
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router();
 const adminController = require('../controllers/admin.js');
-
+const dashboardController = require('../controllers/dashboard.js');
+const fs = require('fs');
 // router.get('/admin', (req,res,next) => {
 //     res.render()
 // })
 
 // MAIN ROUTES
 
-router.get('/', (req,res,next) => {
-   res.render('main-view', {
-       pageTitle: 'DnB Garage'
-   });
+router.get('/', (req, res, next) => {
+    
+    fs.readFile('artists.json', (err, data) => {
+        if (err) throw err;
+        let oArtists = JSON.parse(data);
+        res.status(200).json(oArtists);
+    });
+
 })
 
 // ADMIN ROUTES
 
-router.get('/admin', adminController.getAdmin );
+router.get('/admin', adminController.getAdmin);
 
-router.post('/admin', adminController.postAdmin );
+router.post('/admin', adminController.postAdmin);
+
+router.get('/admin/dashboard', dashboardController.getDashboard);
 
 module.exports = router;

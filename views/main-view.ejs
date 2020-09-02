@@ -6,4 +6,30 @@
 
 </body>
 
+<main> 
+
+<h1> Dashboard</h1>
+
+<section class="artists-container">
+    <% for(var i = 0; i < artists.length; i++) { %>
+    <article class="artist-article">
+        <iframe width="270" height="185" src="https://www.youtube.com/embed/J36kJJhP0bQ">
+        </iframe>
+        <div class="artist-article_content"> 
+        <small>ARTIST NAME</small>
+        <h4><%= artists[i].artistName %></h4>
+        <p>Genre <span class="genre"><%= artists[i].subgenre %></span></p>
+        <a href="<%= artists[i].url2 %>"><%= artists[i].song2 %></a>
+        <a href="<%= artists[i].url3 %>"><%= artists[i].song3 %></a>
+        <div class="artist-article_action">
+            <button type="text" class="btn">Edit</button>
+            <button type="text" class="btn">Delete</button>
+        </div>
+        </div>
+    </article>
+    <% } %>
+</section>
+
+</main>
+
 </html>
