@@ -1,0 +1,31 @@
+<%- include('includes/head.ejs') %>
+
+<title><%= pageTitle %></title>
+
+<%- include('includes/nav.ejs') %>
+
+</body>
+
+<main> 
+
+<h1> Edit Issue </h1>
+
+<form method="POST">
+    <input required class="form-field" type="text" name="txtArtistName" value="<%= artist.artistName %>">
+    <input required class="form-field" type="text" name="txtSubgenre" value="<%= artist.subgenre %>">
+
+    <!-- TODO: similar artists solution -->
+
+    <input required class="form-field" type="text" name="txtUrl1" value="<%= artist.url1 %>">
+    <input required class="form-field" type="text" name="txtSong1" value="<%= artist.song1 %>">
+    <input required class="form-field" type="text" name="txtUrl2" value="<%= artist.url2 %>">
+    <input required class="form-field" type="text" name="txtSong2" value="<%= artist.song2 %>">
+    <input required class="form-field" type="text" name="txtUrl3" value="<%= artist.url3 %>">
+    <input required class="form-field" type="text" name="txtSong3" value="<%= artist.song3 %>">
+
+    <button class="btn" type="submit">Save changes</button>
+</form>
+
+</main>
+
+</html>

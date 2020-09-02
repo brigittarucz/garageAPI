@@ -25,7 +25,7 @@ const fs = require('fs');
 // MAIN ROUTES
 
 router.get('/', (req, res, next) => {
-    
+
     fs.readFile('artists.json', (err, data) => {
         if (err) throw err;
         let oArtists = JSON.parse(data);
@@ -40,6 +40,10 @@ router.get('/admin', adminController.getAdmin);
 
 router.post('/admin', adminController.postAdmin);
 
-router.get('/admin/dashboard', dashboardController.getDashboard);
+router.get('/dashboard', dashboardController.getDashboard);
+
+router.post('/dashboard/edit-artist', dashboardController.editArtist);
+
+router.get('/documentation', dashboardController.getDocumentation);
 
 module.exports = router;

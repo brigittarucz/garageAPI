@@ -41,7 +41,8 @@ exports.postAdmin = (req, res, next) => {
             // TODO: sanitize string URL1 format
             if(req.body.txtUrl1.includes("watch")) {
                 let sUrl = req.body.txtUrl1;
-                sUrlFormat = sUrl.slice(str.indexOf("?v=") + 3, str.length);
+                sUrlEnd = sUrl.slice(sUrl.indexOf("?v=") + 3, sUrl.length);
+                sUrlFormat = "https://www.youtube.com/embed/" + sUrlEnd;
             }
 
             let oNewEntry = {

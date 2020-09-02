@@ -35,6 +35,11 @@ nav h2 {
     color: #1B2A27;
 }
 
+nav h2 a {
+    color: #1B2A27;
+    text-decoration: none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -96,7 +101,7 @@ h1 {
     color: #1B2A27;
 }
 
-.artist-article *:not(iframe):not(.genre):not(.btn) {
+.artist-article *:not(iframe):not(.genre):not(.btn):not(form) {
     margin-top: 0.75rem;
     margin-bottom: 0.5rem;
     margin-left: 1.5rem;
