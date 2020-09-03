@@ -44,6 +44,10 @@ router.get('/dashboard', dashboardController.getDashboard);
 
 router.post('/dashboard/edit-artist', dashboardController.editArtist);
 
+router.post('/dashboard', dashboardController.updateArtist);
+
+router.post('/dashboard/delete-artist', dashboardController.deleteArtist);
+
 router.get('/documentation', dashboardController.getDocumentation);
 
 module.exports = router;

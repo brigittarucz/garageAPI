@@ -10,7 +10,8 @@
 
 <h1> Edit Issue </h1>
 
-<form method="POST">
+<form action="/api/dashboard" method="POST">
+    <input type="hidden" value="<%= artist.id %>" name="artistId">
     <input required class="form-field" type="text" name="txtArtistName" value="<%= artist.artistName %>">
     <input required class="form-field" type="text" name="txtSubgenre" value="<%= artist.subgenre %>">
 
