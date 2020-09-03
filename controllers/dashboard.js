@@ -16,6 +16,8 @@ exports.getDashboard = (req,res,next) => {
 
 // Update the JSON every 24h to look the same
 
+{/* <a href="/" onclick="showPage(); return false"></a> or you can return showPage() instead of both commands*/}
+
 exports.editArtist = (req,res,next) => {
     let artist;
 
