@@ -73,6 +73,7 @@ router.get('/name/:artistName', (req, res, next) => {
 router.get('/subgenre/:subgenre/:sIssues', (req, res, next) => {
     let subgenre = req.params.subgenre.charAt(0).toUpperCase() + req.params.subgenre.slice(1).toLowerCase();
     let iIssues = parseInt(req.params.sIssues);
+    if(iIssues !== 0 ) {
     fs.readFile('artists.json', (err, data) => {
         if (err) throw err;
         let oArtists = JSON.parse(data);
@@ -84,7 +85,6 @@ router.get('/subgenre/:subgenre/:sIssues', (req, res, next) => {
                 let aGenres = sGenres.split(",");
                 for (let j = 0; j < aGenres.length; j++) {
                     if (subgenre === aGenres[j]) {
-                        console.log(aGenres[j]);
                         aData.push(oArtists.artists[i]);
                         if(aData.length === iIssues) {
                             return res.status(200).json(aData);
@@ -92,11 +92,16 @@ router.get('/subgenre/:subgenre/:sIssues', (req, res, next) => {
                     }
                 }
             }
-            if (!res.headersSent) {
+            if(aData[0] !== undefined) {
+                return res.status(200).json(aData);
+            } else if (!res.headersSent) {
                 return res.send('<h1>No artist with this name. Try again!</h1>');
             }
         })();
     });
+    } else {
+        return res.send('<h1>Add a value higher than 0.</h1>');
+    }
 })
 
 router.get('/date/:date', (req, res, next) => {
