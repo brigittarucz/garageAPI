@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const uuid = require('uuid');
+const Artist = require('../models/artists');
 
 exports.getAdmin = (req, res, next) => {
     res.render('admin-panel', {
@@ -45,19 +46,13 @@ exports.postAdmin = (req, res, next) => {
                 sUrlFormat = "https://www.youtube.com/embed/" + sUrlEnd;
             }
 
-            let oNewEntry = {
-                id: uuid.v4(),
-                artistName: req.body.txtArtistName,
-                subgenre: req.body.txtSubgenre,
-                url1: sUrlFormat !== null ? sUrlFormat : req.body.txtUrl1,
-                song1: req.body.txtSong1,
-                url2: req.body.txtUrl2,
-                song2: req.body.txtSong2,
-                url3: req.body.txtUrl3,
-                song3: req.body.txtSong3
-            }    
+            const newArtist = new Artist(uuid.v4(), req.body.txtArtistName, req.body.txtSubgenre,
+            sUrlFormat !== null ? sUrlFormat : req.body.txtUrl1, req.body.txtSong1, req.body.txtLyrics1, req.body.txtVibe1,
+            req.body.txtUrl2, req.body.txtSong2, req.body.txtLyrics2, req.body.txtVibe2,
+            req.body.txtUrl3, req.body.txtSong3, req.body.txtLyrics3, req.body.txtVibe3,
+            Date.now());
             
-            oArtists.artists.push(oNewEntry);
+            oArtists.artists.push(newArtist);
     
             fs.writeFileSync('artists.json', JSON.stringify(oArtists));
         }
