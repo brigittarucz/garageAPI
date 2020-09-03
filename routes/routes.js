@@ -1,28 +1,8 @@
-// const requestHandler = ((req,res,next) => {
-//     const url = req.url;
-//     if(url === '/hello') {
-//         res.write('<html><h1>Hello from hello.js</h1></html>');
-//         return res.end();
-//         }
-//     if(url === '/') {
-//     res.write('<html><h1>Hello from app.js</h1></html>');
-//     return res.end();
-//     }
-
-// })
-
-// exports.requestHandler = requestHandler;
-
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/admin.js');
 const dashboardController = require('../controllers/dashboard.js');
 const fs = require('fs');
-// router.get('/admin', (req,res,next) => {
-//     res.render()
-// })
-
-// MAIN ROUTES
 
 router.get('/', (req, res, next) => {
 
@@ -37,7 +17,6 @@ router.get('/', (req, res, next) => {
 // API ROUTES
 
 router.get('/id/:id', (req, res, next) => {
-    console.log(req.params.id);
     fs.readFile('artists.json', (err, data) => {
         if (err) throw err;
         let oArtists = JSON.parse(data);
@@ -117,9 +96,7 @@ router.get('/date/:date', (req, res, next) => {
             aDates[i] = parseInt(aDates[i]);
         }
         dateInput = new Date(aDates[0], aDates[1] -= 1, aDates[2]);
-        console.log(dateInput);
         dateInput = dateInput.getTime();
-        console.log(dateInput);
     }
 
     fs.readFile('artists.json', (err, data) => {
@@ -268,7 +245,7 @@ router.get('/vibe/:vibe', (req,res,next) => {
 })
 
 
-// ADMIN ROUTES
+// ADMIN/DASHBOARD ROUTES
 
 router.get('/admin', adminController.getAdmin);
 

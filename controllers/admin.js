@@ -10,22 +10,11 @@ exports.getAdmin = (req, res, next) => {
 
 }
 
-// Return a response / http response code / end - otherwise it will timeout
-
 exports.postAdmin = (req, res, next) => {
-
-    // TODO: define a model
-
-    console.log(req.body.txtArtistName);
-
-    // TODO: store in file
 
     fs.readFile('artists.json', (err, data) => {
         if (err) throw err;
         let oArtists = JSON.parse(data);
-
-        // TODO: check if the same artist exists already 
-
         let checkDuplicate = 0;
 
         for(let i = 0; i < oArtists.artists.length; i++ ) {
@@ -39,7 +28,6 @@ exports.postAdmin = (req, res, next) => {
 
             let sUrlFormat = null;
 
-            // TODO: sanitize string URL1 format
             if(req.body.txtUrl1.includes("watch")) {
                 let sUrl = req.body.txtUrl1;
                 sUrlEnd = sUrl.slice(sUrl.indexOf("?v=") + 3, sUrl.length);
@@ -57,8 +45,6 @@ exports.postAdmin = (req, res, next) => {
             fs.writeFileSync('artists.json', JSON.stringify(oArtists));
         }
     })
-
-    // fs.writeFileSync('artists.json', req.body.txtArtistName);
 
     res.redirect('/api/admin');
 }

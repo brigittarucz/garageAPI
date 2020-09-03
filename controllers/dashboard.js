@@ -14,9 +14,7 @@ exports.getDashboard = (req,res,next) => {
     });
 }
 
-// Update the JSON every 24h to look the same
-
-{/* <a href="/" onclick="showPage(); return false"></a> or you can return showPage() instead of both commands*/}
+// TODO: automatically update JSON 
 
 exports.editArtist = (req,res,next) => {
     let artist;
@@ -41,10 +39,6 @@ exports.editArtist = (req,res,next) => {
 }
 
 exports.updateArtist = (req, res, next) => {
-    // TODO: check if it has been changed
-
-    // TODO: get from file and update
-
     fs.readFile('artists.json', (err,data) => {
         if (err) throw err;
         let oArtists = JSON.parse(data);
@@ -54,7 +48,6 @@ exports.updateArtist = (req, res, next) => {
 
                 let sUrlFormat = null;
 
-                // TODO: sanitize string URL1 format
                 if(req.body.txtUrl1.includes("watch")) {
                     let sUrl = req.body.txtUrl1;
                     sUrlEnd = sUrl.slice(sUrl.indexOf("?v=") + 3, sUrl.length);
