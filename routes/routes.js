@@ -55,12 +55,11 @@ router.get('/id/:id', (req, res, next) => {
 
 router.get('/name/:artistName', (req, res, next) => {
     let artistName = req.params.artistName.charAt(0).toUpperCase() + req.params.artistName.slice(1).toLowerCase();
-    console.log(artistName);
     fs.readFile('artists.json', (err, data) => {
         if (err) throw err;
         let oArtists = JSON.parse(data);
         for (let i = 0; i < oArtists.artists.length; i++) {
-            if (artistName === oArtists.artists[i].artistName) {
+            if (artistName === oArtists.artists[i].artistName || oArtists.artists[i].artistName.includes(artistName) ) {
                 res.status(200).json(oArtists.artists[i]);
                 break;
             }
@@ -102,27 +101,167 @@ router.get('/subgenre/:subgenre/:sIssues', (req, res, next) => {
 
 router.get('/date/:date', (req, res, next) => {
     let date = req.params.date;
+
+    let dateInput;
+
     if(date === 'today') {
-        let todayDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime();
+        dateInput = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime();
     } else {
-        console.log(typeof(date));
-        console.log(date);
-        res.status(200);
+        let aDates = date.split("-");
+        for(let i = 0; i < aDates.length; i++) {
+            aDates[i] = parseInt(aDates[i]);
+        }
+        dateInput = new Date(aDates[0], aDates[1] -= 1, aDates[2]);
+        console.log(dateInput);
+        dateInput = dateInput.getTime();
+        console.log(dateInput);
     }
-    // fs.readFile('artists.json', (err, data) => {
-    //     if (err) throw err;
-    //     let oArtists = JSON.parse(data);
-    //     for (let i = 0; i < oArtists.artists.length; i++) {
-    //         if (artistName === oArtists.artists[i].artistName) {
-    //             res.status(200).json(oArtists.artists[i]);
-    //             break;
-    //         }
-    //     }
-    //     if (!res.headersSent) {
-    //         res.send('<h1>No artist with this name. Try again!</h1>');
-    //     }
-    // });
+
+    fs.readFile('artists.json', (err, data) => {
+        if (err) throw err;
+        let oArtists = JSON.parse(data);
+        let aData = [];
+        for (let i = 0; i < oArtists.artists.length; i++) {
+            if (dateInput < oArtists.artists[i].dateAdded) {
+                aData.push(oArtists.artists[i]);
+            }
+        }
+        if (aData[0] !== undefined) {
+           res.status(200).json(aData);
+        } else if (!res.headersSent) {
+           res.send('<h1>No artist(s) on this date. Try again!</h1>');
+        }
+    });
 })
+
+// TODO: month
+
+// TODO: year
+
+router.get('/song/:songTitle', (req, res, next) => {
+    let song = req.params.songTitle.toLowerCase();
+
+    if(song.length > 2) {
+    fs.readFile('artists.json', (err, data) => {
+        if (err) throw err;
+        let oArtists = JSON.parse(data);
+        let aData = [];
+
+        for (let i = 0; i < oArtists.artists.length; i++) {
+            if (oArtists.artists[i].song1.toLowerCase().includes(song)) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url1;
+                queryModel.song = oArtists.artists[i].song1; 
+                aData.push(queryModel);
+            }
+            if (oArtists.artists[i].song2.toLowerCase().includes(song)) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url2;
+                queryModel.song = oArtists.artists[i].song2; 
+                aData.push(queryModel);
+            }
+            if (oArtists.artists[i].song3.toLowerCase().includes(song)) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url3;
+                queryModel.song = oArtists.artists[i].song3; 
+                aData.push(queryModel);
+            }
+        }
+        if (aData[0] !== undefined) {
+            res.status(200).json(aData);
+         } else if (!res.headersSent) {
+            res.send('<h1>No artist with this name. Try again!</h1>');
+        }
+    })
+    } else {
+        res.send('<h1>Minimum 3 letters in the search query. Try again!</h1>');
+    };
+})
+
+router.get('/lyrics/:boolean', (req,res,next) => {
+    let booleanVal = parseInt(req.params.boolean) === 1 ? 'Yes' : 'No';
+
+    fs.readFile('artists.json', (err, data) => {
+        if (err) throw err;
+        let oArtists = JSON.parse(data);
+        let aData = [];
+
+        for (let i = 0; i < oArtists.artists.length; i++) {
+            if(oArtists.artists[i].lyrics1 === booleanVal) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url1;
+                queryModel.song = oArtists.artists[i].song1;
+                aData.push(queryModel);
+            }
+            if(oArtists.artists[i].lyrics2 === booleanVal) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url2;
+                queryModel.song = oArtists.artists[i].song2;
+                aData.push(queryModel);
+            }
+            if(oArtists.artists[i].lyrics3 === booleanVal) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url3;
+                queryModel.song = oArtists.artists[i].song3;
+                aData.push(queryModel);
+            }
+        }
+        if (aData[0] !== undefined) {
+            res.status(200).json(aData);
+         } else if (!res.headersSent) {
+            res.send('<h1> If database is not empty - Invalid URL query search parameter. Try again!</h1>');
+        }
+    })
+
+})
+
+router.get('/vibe/:vibe', (req,res,next) => {
+    let sVibeQuery = req.params.vibe.charAt(0).toUpperCase() + req.params.vibe.slice(1).toLowerCase();
+    sVibeQuery = sVibeQuery.replace(/\s/g, '');
+  
+    fs.readFile('artists.json', (err, data) => {
+        if (err) throw err;
+        let oArtists = JSON.parse(data);
+        let aData = [];
+
+        for(let i = 0; i < oArtists.artists.length; i++) {
+            if(oArtists.artists[i].vibe1 === sVibeQuery || oArtists.artists[i].vibe1.includes(sVibeQuery)) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url1;
+                queryModel.song = oArtists.artists[i].song1;
+                aData.push(queryModel);
+            }
+            if(oArtists.artists[i].vibe2 === sVibeQuery || oArtists.artists[i].vibe2.includes(sVibeQuery)) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url2;
+                queryModel.song = oArtists.artists[i].song2;
+                aData.push(queryModel);
+            }
+            if(oArtists.artists[i].vibe3 === sVibeQuery || oArtists.artists[i].vibe3.includes(sVibeQuery)) {
+                let queryModel = {};
+                queryModel.artist = oArtists.artists[i].artistName;
+                queryModel.url = oArtists.artists[i].url3;
+                queryModel.song = oArtists.artists[i].song3;
+                aData.push(queryModel);
+            }
+        }
+        if (aData[0] !== undefined) {
+            res.status(200).json(aData);
+         } else if (!res.headersSent) {
+            res.send('<h1> No returned query. Try again!</h1>');
+        }
+    })
+   
+})
+
 
 // ADMIN ROUTES
 

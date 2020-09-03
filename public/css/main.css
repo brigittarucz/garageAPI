@@ -21,7 +21,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #1B2A27;
-    
+
 }
 
 nav ul li a:hover {
@@ -31,7 +31,7 @@ nav ul li a:hover {
 nav h2 {
     margin: 0;
     padding: 1rem;
-    font-family: 'Anton',sans-serif;
+    font-family: 'Anton', sans-serif;
     color: #1B2A27;
 }
 
@@ -85,6 +85,7 @@ h1 {
 
 .artist-article {
     margin: 1.5rem;
+    margin-top: 0;
     width: 320px;
     height: 400px;
     background-color: white;
@@ -155,6 +156,48 @@ iframe {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td,
+table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 18px;
+}
+
+table th:nth-of-type(1) {
+    width: 100px;
+}
+
+table tr td:nth-of-type(1), table tr td:nth-of-type(2),
+table th:nth-of-type(1), table th:nth-of-type(2),
+table th:nth-of-type(3) {
+    text-align: center;
+}
+
+table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+table tr:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #03D7C2;
+    color:  white;
 }
 
 /* #1B2A27 - dark
